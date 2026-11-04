@@ -43,11 +43,16 @@
     onActivation.extraFlags = [ "--force" ];
     brews = [
       "herdr"
+      "mas"
+      "python@3.11"
     ];
     casks = [
       "wezterm"
       "claude-code"
       "codex"
+      "opensuperwhisper"
+      "google-chrome"
+      "localsend"
     ];
   };
 }

@@ -20,10 +20,15 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+
+    no-mistakes.url = "github:kunchenguid/no-mistakes";
+    no-mistakes.inputs.nixpkgs.follows = "nixpkgs";
+    treehouse.url = "github:kunchenguid/treehouse";
+    treehouse.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nix-darwin, nix-homebrew, home-manager, nixpkgs
-    , homebrew-core, homebrew-cask }:
+    , homebrew-core, homebrew-cask, no-mistakes, treehouse }:
     let
       # The one username line to change if this isn't your machine.
       # bootstrap.sh offers to rewrite this for you if your macOS username differs.
@@ -42,7 +47,9 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit user; };
+            # Move pre-existing unmanaged files (e.g. ~/.zshrc) aside instead of failing activation.
+            home-manager.backupFileExtension = "hm-backup";
+            home-manager.extraSpecialArgs = { inherit user no-mistakes treehouse; };
             home-manager.users.${user} = import ./home.nix;
           }
         ];

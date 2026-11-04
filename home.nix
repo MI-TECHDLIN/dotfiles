@@ -1,7 +1,8 @@
-{ config, pkgs, user, ... }:
+{ config, pkgs, user, no-mistakes, treehouse, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
+  system = pkgs.stdenv.hostPlatform.system;
 in
 
 {
@@ -16,11 +17,23 @@ in
     jq        # json on the command line
     lazygit
     neovim
+    gh        # GitHub CLI
+    nodejs    # npx skills, lavish-axi, gnhf and other npm CLIs
+    # agent tooling (firstmate uses both)
+    no-mistakes.packages.${system}.default
+    treehouse.packages.${system}.default
     # Installed and exposed to macOS through Home Manager.
     nerd-fonts.hack
   ];
   fonts.fontconfig.enable = true;
   home.sessionVariables.EDITOR = "nvim";
+  home.sessionPath = [
+    "$HOME/.npm-global/bin"
+    "$HOME/.local/bin"
+    "$HOME/development/flutter/bin"
+  ];
+  # Global npm installs go to a writable prefix, not the read-only nix store.
+  home.file.".npmrc".text = "prefix=${config.home.homeDirectory}/.npm-global\n";
 
   programs.zsh = {
     enable = true;

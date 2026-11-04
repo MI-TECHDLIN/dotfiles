@@ -17,6 +17,38 @@
         "type": "github"
       }
     },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -125,6 +157,27 @@
         "type": "github"
       }
     },
+    "no-mistakes": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793802070,
+        "narHash": "sha256-AAoU7B0qr+sHMNyfsT0wR1SfM6+TzjufMjaKUQ8oaSg=",
+        "owner": "kunchenguid",
+        "repo": "no-mistakes",
+        "rev": "6aa19b15791994c27660f792d01a275fcf0070d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kunchenguid",
+        "repo": "no-mistakes",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -132,7 +185,30 @@
         "homebrew-core": "homebrew-core",
         "nix-darwin": "nix-darwin",
         "nix-homebrew": "nix-homebrew",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "no-mistakes": "no-mistakes",
+        "treehouse": "treehouse"
+      }
+    },
+    "treehouse": {
+      "inputs": {
+        "flake-compat": "flake-compat_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793366452,
+        "narHash": "sha256-mWXCKpytKSnViyDoDghpRyE2fC+qJIWmIGN+MHSmw+0=",
+        "owner": "kunchenguid",
+        "repo": "treehouse",
+        "rev": "f168807c583ec3afaec7635806b3688d5530e945",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kunchenguid",
+        "repo": "treehouse",
+        "type": "github"
       }
     }
   },
