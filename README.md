@@ -71,14 +71,17 @@ If you renamed the host label in "Make it yours", substitute your label for `mac
 
 ## Daily use
 
-Edit the config files in place, then apply:
+Run `./bootstrap.sh` once on a fresh Mac. It installs Nix and performs the
+first switch. `darwin-rebuild` is not available before that first bootstrap.
+Afterward, edit the config files in place and apply:
 
 ```sh
 ./rebuild.sh
 ```
 
-That's it.
-No separate build-and-copy step.
+The rebuild script also loads the Determinate Nix profile when it is installed
+but not yet present in the current shell, and uses the pinned nix-darwin
+`darwin-rebuild` runner until the command is installed.
 
 ## Make it yours
 
