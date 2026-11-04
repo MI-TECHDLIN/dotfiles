@@ -16,7 +16,7 @@ in
     jq        # json on the command line
     lazygit
     neovim
-    # the font everything renders in
+    # Installed and exposed to macOS through Home Manager.
     nerd-fonts.hack
   ];
   fonts.fontconfig.enable = true;

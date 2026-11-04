@@ -128,6 +128,12 @@ in the `casks` list.
 It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
 If you don't use it, just remove it from `brews` in your copy.
 
+**Home Manager:** the flake locks Home Manager and makes it follow the same
+locked nixpkgs revision. The `home-manager.darwinModules.home-manager` module
+installs the packages in `home.nix`, including `nerd-fonts.hack`, and enables
+fontconfig. Apply the system with `./rebuild.sh`; do not install Home Manager
+separately or use an unpinned channel.
+
 **Heads-up:**
 
 - `home/AGENTS.md` is my personal agent policy, and `home.nix` installs it for Claude, Codex, and opencode.
