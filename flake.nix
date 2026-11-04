@@ -31,7 +31,7 @@
     in
     {
       darwinConfigurations."mac" = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit user; };
+        specialArgs = { inherit user homebrew-core homebrew-cask; };
         modules = [
           ./configuration.nix
           nix-homebrew.darwinModules.nix-homebrew

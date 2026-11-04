@@ -20,7 +20,7 @@ Running the switch builds:
 - Nix user packages (ripgrep, fd, fzf, jq, lazygit, Neovim, Hack Nerd Font)
 - Shell (zsh, aliases, starship prompt)
 - Editor (Neovim config with the rose-pine moon theme)
-- Terminal (WezTerm config with the rose-pine moon theme and dimmed unfocused windows)
+- Terminal (WezTerm config with the Rosé Pine Moon theme and dimmed unfocused windows)
 - Agent configs (Claude, Codex, opencode all share one AGENTS.md)
 - Optional Pi theme and local extensions, UI settings, and model overrides
 
@@ -118,8 +118,8 @@ That means every time you switch, Homebrew removes any package or cask on your m
 If you already have Homebrew stuff installed that isn't in that list, the first switch will uninstall it.
 Read through `brews` and `casks` before you run `bootstrap.sh` or `rebuild.sh` for the first time, and add anything you want to keep.
 
-**Declared apps:** `herdr` is installed as a Homebrew formula. WezTerm and
-Claude Code are installed as Homebrew casks. Remove or change these entries in
+**Declared apps:** `herdr` is installed as a Homebrew formula. WezTerm, Claude
+Code, and Codex are installed as Homebrew casks. Remove or change these entries in
 `configuration.nix` if they are not part of your setup.
 
 **Home Manager:** the flake locks Home Manager and makes it follow the same
@@ -134,6 +134,32 @@ separately or use an unpinned channel.
   Review it before using this repository on another machine.
 - The `cc` and `co` shell aliases in `home.nix` are high-agency shortcuts: `claude --dangerously-skip-permissions` and `codex --full-auto`.
   They're convenient for me, but know what they do before you use them.
+
+### Shell shortcuts
+
+`home.nix` enables zsh autosuggestions and syntax highlighting. Press
+`Ctrl+F` to accept the current autosuggestion. The configured aliases are:
+
+| Alias | Command |
+| --- | --- |
+| `ll` / `la` | `ls -lah` / `ls -A` |
+| `c` / `v` | `clear` / `nvim` |
+| `gs` / `gl` / `gd` | `git status` / graph log / `git diff` |
+| `ga` / `gc` | `git add` / `git commit` |
+| `gp` / `gpl` | `git push` / `git pull` |
+| `add` / `m` | `git add .` / `git switch main` |
+| `cc` / `co` | Claude Code with permissions skipped / Codex full-auto |
+| `dcu` / `dcd` | `docker compose up` / `docker compose down` |
+
+Run `./rebuild.sh` after changing `home.nix` to apply these aliases.
+
+### Starship prompt
+
+Starship shows the current directory, Git branch, concise Git changes, and
+commands taking at least two seconds. Directories are shortened to three
+components, and the prompt uses purple for successful commands and red for
+failed commands. Git ahead/behind, staged, modified, untracked, renamed, and
+deleted counts are shown when present.
 
 ## Repo tour
 
@@ -191,7 +217,9 @@ Home Manager deliberately does not manage `~/.pi/agent` itself, or Pi authentica
 
 The first time you launch `nvim`, it bootstraps [lazy.nvim](https://github.com/folke/lazy.nvim) by cloning plugins from GitHub.
 That needs network access once; after that it's offline.
-Neovim and WezTerm both use the rose-pine moon theme.
+Neovim and WezTerm use the Rosé Pine Moon theme. WezTerm uses Hack Nerd Font
+at 10pt, 50px macOS background blur, and the tab bar hidden
+when only one tab is open.
 Neovim keeps italics off and uses a transparent background on macOS, Windows, and WSL so it matches the terminal setup.
 
 ## License

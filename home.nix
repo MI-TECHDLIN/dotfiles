@@ -31,12 +31,23 @@ in
     '';
     shellAliases = {
       ".." = "cd ..";
+      ll = "ls -lah";
+      la = "ls -A";
+      c = "clear";
+      v = "nvim";
+      gs = "git status";
+      gl = "git log --oneline --decorate --graph";
+      gd = "git diff";
+      ga = "git add";
+      gc = "git commit";
+      gp = "git push";
+      gpl = "git pull";
       add = "git add .";
-      push = "git push";
-      pull = "git pull";
       m = "git switch main";
       cc = "claude --dangerously-skip-permissions";
       co = "codex --full-auto";
+      dcu = "docker compose up";
+      dcd = "docker compose down";
     };
   };
 
@@ -45,11 +56,38 @@ in
     settings = {
       add_newline = false;
       format = "$directory$git_branch$git_status$cmd_duration$line_break$character";
+      directory = {
+        truncation_length = 3;
+        truncate_to_repo = false;
+        style = "bold blue";
+      };
+      git_branch = {
+        format = " [$branch]($style)";
+        style = "bold cyan";
+      };
+      git_status = {
+        format = " [$all_status$ahead_behind]($style)";
+        style = "yellow";
+        conflicted = "!";
+        ahead = "⇡$count";
+        behind = "⇣$count";
+        diverged = "⇕⇡$ahead_count⇣$behind_count";
+        untracked = "?$count";
+        stashed = "\\$$count";
+        modified = "!$count";
+        staged = "+$count";
+        renamed = "»$count";
+        deleted = "✘$count";
+      };
       character = {
         success_symbol = "[❯](purple)";
         error_symbol = "[❯](red)";
       };
-      cmd_duration.format = "[$duration]($style) ";
+      cmd_duration = {
+        min_time = 2000;
+        format = " [$duration]($style)";
+        style = "dimmed white";
+      };
     };
   };
 

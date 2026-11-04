@@ -27,6 +27,7 @@
   };
   nix-homebrew = {
     enable = true;
+    autoMigrate = true;
     inherit user;
     mutableTaps = false;
     taps = {
@@ -46,6 +47,7 @@
     casks = [
       "wezterm"
       "claude-code"
+      "codex"
     ];
   };
 }
