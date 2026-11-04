@@ -1,23 +1,15 @@
-# dotfiles
+# MI-TECHDLIN dotfiles
 
-<p align="center">
-  <a href="https://discord.gg/Wsy2NpnZDu"
-    ><img
-      alt="Discord"
-      src="https://img.shields.io/discord/1439901831038763092?style=flat-square&label=discord"
-  /></a>
-</p>
+Personal macOS configuration for MI-TECHDLIN, managed with Nix, nix-darwin,
+Home Manager, and nix-homebrew.
 
-Watch the walkthrough: https://youtu.be/5N-okeDdIuI
-
-My personal Mac setup, managed with nix-darwin and home-manager.
-One repo, one command, and a fresh Mac ends up configured the same way every time.
+The goal is a repeatable Apple Silicon Mac setup: clone this repository, review
+the declared apps and settings, then apply the locked configuration.
 
 ## Contributing / Using This Repo
 
-These are my personal dotfiles, shared publicly so people can read them, learn from them, and fork them freely.
-Feature requests and pull requests are not accepted here, and PRs are auto-closed.
-If you find a bug, please open a GitHub Issue using the bug report template.
+These are personal dotfiles shared publicly for reference. Fork or adapt them
+for your own machine, but review every setting before applying them.
 
 ## What you get
 
@@ -30,7 +22,7 @@ Running the switch builds:
 - Editor (Neovim config with the rose-pine moon theme)
 - Terminal (WezTerm config with the rose-pine moon theme and dimmed unfocused windows)
 - Agent configs (Claude, Codex, opencode all share one AGENTS.md)
-- Optional Pi theme and local extensions, generic UI settings and model overrides, plus two deliberately pinned third-party Pi packages
+- Optional Pi theme and local extensions, UI settings, and model overrides
 
 ## Prerequisites
 
@@ -90,8 +82,8 @@ No separate build-and-copy step.
 
 ## Make it yours
 
-This repo is mine.
-If you clone it, review these before you run `bootstrap.sh`:
+This configuration is for `mi-tech`. If you adapt it for another machine,
+review these before running `bootstrap.sh`:
 
 - **Username**: run `./bootstrap.sh` (it detects your macOS username and offers to set it) OR change the single `user = "mi-tech"` line in `flake.nix`.
   Everything else (`configuration.nix`, `home.nix`, home directory paths) is threaded from that one variable.
@@ -123,10 +115,9 @@ That means every time you switch, Homebrew removes any package or cask on your m
 If you already have Homebrew stuff installed that isn't in that list, the first switch will uninstall it.
 Read through `brews` and `casks` before you run `bootstrap.sh` or `rebuild.sh` for the first time, and add anything you want to keep.
 
-**About the declared apps:** `herdr` is in the `brews` list, and WezTerm is
-in the `casks` list.
-It's a real public Homebrew formula (`brew info herdr` finds it in homebrew-core, no tap needed), so it will install fine.
-If you don't use it, just remove it from `brews` in your copy.
+**Declared apps:** `herdr` is installed as a Homebrew formula. WezTerm and
+Claude Code are installed as Homebrew casks. Remove or change these entries in
+`configuration.nix` if they are not part of your setup.
 
 **Home Manager:** the flake locks Home Manager and makes it follow the same
 locked nixpkgs revision. The `home-manager.darwinModules.home-manager` module
@@ -136,8 +127,8 @@ separately or use an unpinned channel.
 
 **Heads-up:**
 
-- `home/AGENTS.md` is my personal agent policy, and `home.nix` installs it for Claude, Codex, and opencode.
-  If you clone this repo, you'd silently inherit my agent instructions - edit or delete `home/AGENTS.md` if you don't want that.
+- `home/AGENTS.md` contains the agent policy installed for Claude, Codex, and opencode.
+  Review it before using this repository on another machine.
 - The `cc` and `co` shell aliases in `home.nix` are high-agency shortcuts: `claude --dangerously-skip-permissions` and `codex --full-auto`.
   They're convenient for me, but know what they do before you use them.
 
@@ -165,10 +156,11 @@ Pi is an opt-in CLI, not a dependency this repository vendors. Install it from i
 npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-[Pi Launcher](https://github.com/kunchenguid/homebrew-tap) is also optional and installed from its owner, not declared by this config:
+[Pi Launcher](https://github.com/earendil-works/pi-launcher) is also optional
+and is not declared by this config:
 
 ```sh
-brew install --cask kunchenguid/tap/pi-launcher
+brew install --cask pi-launcher
 ```
 
 Home Manager owns exactly two repository-authored Pi directories: `~/.pi/agent/themes` and `~/.pi/agent/extensions`. It also links `models.json` and `settings.json` as individual files. The local extension directory is for public, repository-authored extensions only - third-party package code never belongs there. Run `/reload` after editing a local extension or other Pi resources. The terminal-title extension shows a spinner while Pi is working, then a completion mark with the session name or current directory. The `rose-pine-moon` theme was authored clean-room from the public [Rosé Pine Moon palette](https://rosepinetheme.com/palette) and Pi's [public theme schema](https://raw.githubusercontent.com/earendil-works/pi/main/packages/coding-agent/src/modes/interactive/theme/theme-schema.json), not from a private or live theme file.
