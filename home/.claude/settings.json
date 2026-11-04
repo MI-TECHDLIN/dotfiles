@@ -1,7 +1,42 @@
 {
-  "theme": "dark-ansi",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "gh-axi",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "chrome-devtools-axi",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "lavish-axi",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "/usr/bin/python3 -c 'import sys,json,os,fcntl,termios,struct\nd=json.load(sys.stdin)\np=float((d.get(\"context_window\") or {}).get(\"used_percentage\") or 0)\nm=(d.get(\"model\") or {}).get(\"display_name\") or \"Claude\"\ntry:\n f=os.open(\"/dev/tty\",os.O_RDONLY)\n w=struct.unpack(\"hh\",fcntl.ioctl(f,termios.TIOCGWINSZ,b\"0000\"))[1]\nexcept Exception:\n w=int(os.environ.get(\"COLUMNS\") or 80)\nh=\"{} | ctx {:.0f}% \".format(m,p)\nn=max(5,w-len(h)-6)\nk=min(n,int(round(n*p/100)))\nprint(h+\"[\"+\"\\u2588\"*k+\"\\u2591\"*(n-k)+\"]\")'"
-  }
+  },
+  "theme": "dark-ansi",
+  "skipDangerousModePermissionPrompt": true
 }

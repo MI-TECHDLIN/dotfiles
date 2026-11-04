@@ -1,4 +1,4 @@
-{ config, pkgs, user, no-mistakes, treehouse, ... }:
+{ config, lib, pkgs, user, no-mistakes, treehouse, ... }:
 
 let
   dotfiles = "${config.home.homeDirectory}/.dotfiles";
@@ -111,6 +111,15 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
   home.file.".config/herdr".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
+  home.activation.installHackNerdFont = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    font_dir="$HOME/Library/Fonts"
+    font_source="${pkgs.nerd-fonts.hack}/share/fonts/truetype/NerdFonts/Hack"
+    mkdir -p "$font_dir"
+    for font in HackNerdFont-Regular.ttf HackNerdFont-Bold.ttf HackNerdFont-Italic.ttf HackNerdFont-BoldItalic.ttf; do
+      rm -f "$font_dir/$font"
+      cp "$font_source/$font" "$font_dir/$font"
+    done
+  '';
   home.file.".claude/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.claude/settings.json";
 
